@@ -1,0 +1,278 @@
+﻿<Window x:Class="DarkLedger.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        Title="Dark Ledger — Тёмный реестр"
+        Height="760" Width="1200"
+        MinHeight="600" MinWidth="900"
+        Background="{StaticResource BackgroundDarkBrush}"
+        Foreground="{StaticResource TextPrimaryBrush}"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="CanResize"
+        AllowsTransparency="False"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
+        FontFamily="{StaticResource FontFamilyMain}"
+        FontSize="{StaticResource FontSizeBody}">
+
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome CaptionHeight="0"
+                            ResizeBorderThickness="6"
+                            GlassFrameThickness="0"
+                            CornerRadius="0"
+                            UseAeroCaptionButtons="False"/>
+    </shell:WindowChrome.WindowChrome>
+
+    <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <!-- TitleBar -->
+                <RowDefinition Height="Auto"/>
+                <!-- Menu -->
+                <RowDefinition Height="*"/>
+                <!-- Tabs -->
+                <RowDefinition Height="26"/>
+                <!-- StatusBar -->
+            </Grid.RowDefinitions>
+
+            <!-- ==================== TITLE BAR ==================== -->
+            <Border Grid.Row="0"
+                    Background="{StaticResource AccentBordeauxBrush}"
+                    MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Icon -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Title -->
+                        <ColumnDefinition Width="*"/>
+                        <!-- Spacer -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Folders -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Min -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Max -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Close -->
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Icon -->
+                    <Image Grid.Column="0"
+                           x:Name="TitleIcon"
+                           Width="16" Height="16"
+                           Margin="10,0,8,0"
+                           VerticalAlignment="Center"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
+
+                    <!-- Title -->
+                    <TextBlock Grid.Column="1"
+                               Text="Dark Ledger — Тёмный реестр"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               VerticalAlignment="Center"
+                               Margin="0,0,16,0"/>
+
+                    <!-- Folders Button -->
+                    <Button Grid.Column="3"
+                            x:Name="FoldersButton"
+                            Content="📂 Папки"
+                            Style="{StaticResource DarkButton}"
+                            Padding="12,4"
+                            Margin="0,3,8,3"
+                            Click="FoldersButton_Click"/>
+
+                    <!-- Minimize -->
+                    <Button Grid.Column="4"
+                            x:Name="MinimizeButton"
+                            Content="─"
+                            Width="46" Height="32"
+                            FontSize="13"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource TextPrimaryBrush}"
+                            Cursor="Hand"
+                            Click="MinimizeButton_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="Bg" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Bg" Property="Background" Value="{StaticResource AccentBordeauxBrush}"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <!-- Maximize -->
+                    <Button Grid.Column="5"
+                            x:Name="MaximizeButton"
+                            Content="☐"
+                            Width="46" Height="32"
+                            FontSize="13"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource TextPrimaryBrush}"
+                            Cursor="Hand"
+                            Click="MaximizeButton_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="Bg" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Bg" Property="Background" Value="{StaticResource AccentBordeauxBrush}"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <!-- Close -->
+                    <Button Grid.Column="6"
+                            x:Name="CloseButton"
+                            Content="✕"
+                            Width="46" Height="32"
+                            FontSize="13"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource TextPrimaryBrush}"
+                            Cursor="Hand"
+                            Click="CloseButton_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="Bg" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Bg" Property="Background" Value="{StaticResource AccentRedBrush}"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- ==================== MENU ==================== -->
+            <Menu Grid.Row="1"
+                  Background="{StaticResource BackgroundPanelBrush}"
+                  Foreground="{StaticResource TextPrimaryBrush}"
+                  Padding="4,2">
+                <MenuItem Header="Файл" Foreground="{StaticResource TextSecondaryBrush}">
+                    <MenuItem Header="📦 Экспорт всех данных (ZIP)"
+                              InputGestureText="Ctrl+E"
+                              Click="ExportZipMenu_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Выход"
+                              InputGestureText="Ctrl+Q"
+                              Click="FileExit_Click"/>
+                </MenuItem>
+                <MenuItem Header="Вид" Foreground="{StaticResource TextSecondaryBrush}">
+                    <MenuItem Header="Обновить"
+                              InputGestureText="Ctrl+R"
+                              Click="ViewRefresh_Click"/>
+                    <MenuItem Header="⚙️ Настройки"
+                              InputGestureText="Ctrl+S"
+                              Click="SettingsMenu_Click"/>
+                </MenuItem>
+                <MenuItem Header="Трекинг" Foreground="{StaticResource TextSecondaryBrush}">
+                    <MenuItem Header="Пауза" Click="TrackingPause_Click"/>
+                    <MenuItem Header="Возобновить" Click="TrackingResume_Click"/>
+                </MenuItem>
+                <MenuItem Header="Помощь" Foreground="{StaticResource TextSecondaryBrush}">
+                    <MenuItem Header="⌨️ Горячие клавиши" Click="HelpShortcuts_Click"/>
+                    <MenuItem Header="🔄 Проверить обновления" Click="CheckUpdatesButton_Click"/>
+                    <MenuItem Header="Связь с разработчиком" Click="HelpContact_Click"/>
+                    <MenuItem Header="О программе" Click="HelpAbout_Click"/>
+                </MenuItem>
+            </Menu>
+
+            <!-- ==================== TABS ==================== -->
+            <TabControl Grid.Row="2"
+                        x:Name="MainTabControl"
+                        Background="{StaticResource BackgroundDarkBrush}"
+                        BorderThickness="0">
+                <TabItem Header="Обзор">
+                    <Grid x:Name="OverviewTabHost" Background="{StaticResource BackgroundDarkBrush}"/>
+                </TabItem>
+                <TabItem Header="Хроника">
+                    <Grid x:Name="ChronicleTabHost" Background="{StaticResource BackgroundDarkBrush}"/>
+                </TabItem>
+                <TabItem Header="Аналитика">
+                    <Grid x:Name="AnalyticsTabHost" Background="{StaticResource BackgroundDarkBrush}"/>
+                </TabItem>
+                <TabItem Header="Дневник">
+                    <Grid x:Name="DiaryTabHost" Background="{StaticResource BackgroundDarkBrush}"/>
+                </TabItem>
+                <TabItem Header="Отчёты">
+                    <Grid x:Name="ReportsTabHost" Background="{StaticResource BackgroundDarkBrush}"/>
+                </TabItem>
+            </TabControl>
+
+            <!-- ==================== STATUS BAR ==================== -->
+            <Border Grid.Row="3"
+                    Background="{StaticResource BackgroundPanelBrush}"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="0,1,0,0">
+                <Grid Margin="8,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               x:Name="StatusTracking"
+                               Text="● Трекинг активен"
+                               Foreground="{StaticResource AccentRedBrush}"
+                               FontSize="12"
+                               VerticalAlignment="Center"/>
+
+                    <TextBlock Grid.Column="2"
+                               x:Name="StatusUptime"
+                               Text="Uptime: 00:00:00"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               FontSize="12"
+                               VerticalAlignment="Center"
+                               Margin="0,0,12,0"/>
+
+                    <TextBlock Grid.Column="3"
+                               Text="|"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               FontSize="12"
+                               VerticalAlignment="Center"
+                               Margin="0,0,12,0"/>
+
+                    <TextBlock Grid.Column="4"
+                               Text="v1.0.0"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               FontSize="12"
+                               VerticalAlignment="Center"
+                               Margin="0,0,12,0"/>
+
+                    <TextBlock Grid.Column="5"
+                               x:Name="StatusContact"
+                               Text="📨 @Boleznen"
+                               Foreground="{StaticResource AccentPurpleBrush}"
+                               FontSize="12"
+                               VerticalAlignment="Center"
+                               Cursor="Hand"
+                               MouseLeftButtonDown="StatusContact_Click"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

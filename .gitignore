@@ -1,0 +1,16 @@
+# Build results
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Release binaries (заливаем через Releases, не в исходники)
+*.exe
+*.zip
+*.pdb
+
+# NuGet
+packages/

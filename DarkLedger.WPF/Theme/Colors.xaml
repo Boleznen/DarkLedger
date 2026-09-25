@@ -1,0 +1,60 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- ==================== ФОНЫ ==================== -->
+    <Color x:Key="BackgroundDarkColor">#FF0F0F14</Color>
+    <Color x:Key="BackgroundPanelColor">#FF191923</Color>
+    <Color x:Key="BackgroundCardColor">#FF23202D</Color>
+
+    <SolidColorBrush x:Key="BackgroundDarkBrush" Color="{StaticResource BackgroundDarkColor}"/>
+    <SolidColorBrush x:Key="BackgroundPanelBrush" Color="{StaticResource BackgroundPanelColor}"/>
+    <SolidColorBrush x:Key="BackgroundCardBrush" Color="{StaticResource BackgroundCardColor}"/>
+
+    <!-- ==================== АКЦЕНТЫ ==================== -->
+    <Color x:Key="AccentRedColor">#FF8C141E</Color>
+    <Color x:Key="AccentBordeauxColor">#FF5A0F19</Color>
+    <Color x:Key="AccentBlueColor">#FF1E326E</Color>
+    <Color x:Key="AccentPurpleColor">#FF4B286E</Color>
+
+    <SolidColorBrush x:Key="AccentRedBrush" Color="{StaticResource AccentRedColor}"/>
+    <SolidColorBrush x:Key="AccentBordeauxBrush" Color="{StaticResource AccentBordeauxColor}"/>
+    <SolidColorBrush x:Key="AccentBlueBrush" Color="{StaticResource AccentBlueColor}"/>
+    <SolidColorBrush x:Key="AccentPurpleBrush" Color="{StaticResource AccentPurpleColor}"/>
+
+    <!-- ==================== ТЕКСТ ==================== -->
+    <Color x:Key="TextPrimaryColor">#FFE6E6F0</Color>
+    <Color x:Key="TextSecondaryColor">#FFA0A0B4</Color>
+    <Color x:Key="TextMutedColor">#FF646478</Color>
+
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimaryColor}"/>
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondaryColor}"/>
+    <SolidColorBrush x:Key="TextMutedBrush" Color="{StaticResource TextMutedColor}"/>
+
+    <!-- ==================== ГРАНИЦЫ ==================== -->
+    <Color x:Key="BorderColor">#FF37324B</Color>
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}"/>
+
+    <!-- ==================== ДОПОЛНИТЕЛЬНЫЕ ЦВЕТА ==================== -->
+    <SolidColorBrush x:Key="SuccessBrush" Color="#FF22C55E"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="#FFF59E0B"/>
+    <SolidColorBrush x:Key="ErrorBrush" Color="#FFDC2626"/>
+
+    <!-- ==================== ГРАДИЕНТЫ ==================== -->
+    <LinearGradientBrush x:Key="TitleBarGradientBrush" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="{StaticResource AccentBordeauxColor}" Offset="0"/>
+        <GradientStop Color="{StaticResource AccentRedColor}" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- ==================== ШРИФТЫ ==================== -->
+    <FontFamily x:Key="FontFamilyMain">Segoe UI</FontFamily>
+    <FontFamily x:Key="FontFamilyMono">Consolas</FontFamily>
+
+    <sys:Double x:Key="FontSizeSmall">11</sys:Double>
+    <sys:Double x:Key="FontSizeBody">13</sys:Double>
+    <sys:Double x:Key="FontSizeBodyLarge">14</sys:Double>
+    <sys:Double x:Key="FontSizeTitle">18</sys:Double>
+    <sys:Double x:Key="FontSizeTitleLarge">22</sys:Double>
+    <sys:Double x:Key="FontSizeDisplay">28</sys:Double>
+
+</ResourceDictionary>

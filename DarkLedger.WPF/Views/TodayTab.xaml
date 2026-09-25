@@ -1,0 +1,148 @@
+﻿<UserControl x:Class="DarkLedger.WPF.Views.TodayTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BackgroundDarkBrush}">
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 3 КАРТОЧКИ -->
+        <Grid Grid.Row="0" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- UPTIME -->
+            <Border Grid.Column="0" Style="{StaticResource Card}" MinHeight="120">
+                <StackPanel>
+                    <TextBlock Text="UPTIME"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,6"/>
+                    <TextBlock x:Name="UptimeValue"
+                               Text="0ч 0м"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               FontSize="{StaticResource FontSizeDisplay}"
+                               FontWeight="Bold"/>
+                    <TextBlock x:Name="UptimeSub"
+                               Text="С момента включения ПК"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               Margin="0,4,0,0"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+
+            <!-- ОТСЛЕЖЕНО -->
+            <Border Grid.Column="2" Style="{StaticResource Card}" MinHeight="120">
+                <StackPanel>
+                    <TextBlock Text="ОТСЛЕЖЕНО"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,6"/>
+                    <TextBlock x:Name="TrackedValue"
+                               Text="0ч 0м"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               FontSize="{StaticResource FontSizeDisplay}"
+                               FontWeight="Bold"/>
+                    <TextBlock x:Name="TrackedSub"
+                               Text="Dark Ledger отследил"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               Margin="0,4,0,0"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+
+            <!-- ГЛАВНОЕ -->
+            <Border Grid.Column="4" Style="{StaticResource Card}" MinHeight="120">
+                <StackPanel>
+                    <TextBlock Text="ГЛАВНОЕ"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,6"/>
+                    <TextBlock x:Name="TopAppValue"
+                               Text="—"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               FontSize="{StaticResource FontSizeTitle}"
+                               FontWeight="Bold"
+                               TextTrimming="CharacterEllipsis"/>
+                    <TextBlock x:Name="TopAppSub"
+                               Text="Нет данных"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               Margin="0,4,0,0"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- ФИЛЬТРЫ -->
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    Margin="0,0,0,12">
+            <RadioButton x:Name="FilterToday" Content="Сегодня" GroupName="Period"
+                         Style="{StaticResource FilterButton}" IsChecked="True"
+                         Margin="0,0,8,0" Click="Filter_Click" Tag="Today"/>
+            <RadioButton x:Name="FilterYesterday" Content="Вчера" GroupName="Period"
+                         Style="{StaticResource FilterButton}"
+                         Margin="0,0,8,0" Click="Filter_Click" Tag="Yesterday"/>
+            <RadioButton x:Name="Filter7Days" Content="7 дней" GroupName="Period"
+                         Style="{StaticResource FilterButton}"
+                         Margin="0,0,8,0" Click="Filter_Click" Tag="Last7Days"/>
+            <RadioButton x:Name="Filter30Days" Content="30 дней" GroupName="Period"
+                         Style="{StaticResource FilterButton}"
+                         Margin="0,0,8,0" Click="Filter_Click" Tag="Last30Days"/>
+            <RadioButton x:Name="FilterAllTime" Content="Всё время" GroupName="Period"
+                         Style="{StaticResource FilterButton}"
+                         Click="Filter_Click" Tag="AllTime"/>
+        </StackPanel>
+
+        <!-- ЦЕЛИ ДНЯ -->
+        <Border Grid.Row="2" x:Name="GoalsCard"
+                Style="{StaticResource Card}"
+                Margin="0,0,0,12"
+                Visibility="Collapsed">
+            <StackPanel>
+                <TextBlock Text="🎯 ЦЕЛИ ДНЯ"
+                           Foreground="{StaticResource TextMutedBrush}"
+                           FontSize="{StaticResource FontSizeSmall}"
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,10"/>
+                <StackPanel x:Name="GoalsContainer"/>
+            </StackPanel>
+        </Border>
+
+        <!-- ЗАГОЛОВОК -->
+        <TextBlock Grid.Row="3"
+                   Text="ПРИЛОЖЕНИЯ"
+                   Foreground="{StaticResource TextMutedBrush}"
+                   FontSize="{StaticResource FontSizeSmall}"
+                   FontWeight="SemiBold"
+                   Margin="0,0,0,8"/>
+
+        <!-- СПИСОК -->
+        <Border Grid.Row="4"
+                Background="{StaticResource BackgroundDarkBrush}"
+                BorderThickness="0">
+            <ScrollViewer x:Name="AppsScrollViewer"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <StackPanel x:Name="AppsContainer"/>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

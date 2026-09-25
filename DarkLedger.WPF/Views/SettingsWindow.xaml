@@ -1,0 +1,292 @@
+﻿<Window x:Class="DarkLedger.WPF.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        Title="Настройки — Dark Ledger"
+        Width="580" Height="680"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStyle="None"
+        Background="{StaticResource BackgroundDarkBrush}"
+        Foreground="{StaticResource TextPrimaryBrush}"
+        FontFamily="{StaticResource FontFamilyMain}"
+        FontSize="{StaticResource FontSizeBody}">
+
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome CaptionHeight="0"
+                            ResizeBorderThickness="0"
+                            GlassFrameThickness="0"
+                            CornerRadius="0"
+                            UseAeroCaptionButtons="False"/>
+    </shell:WindowChrome.WindowChrome>
+
+    <Border BorderBrush="{StaticResource AccentBordeauxBrush}" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Кастомный тайтлбар -->
+            <Border Grid.Row="0"
+                    Background="{StaticResource AccentBordeauxBrush}"
+                    MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               Text="Настройки — Dark Ledger"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               VerticalAlignment="Center"
+                               Margin="10,0,0,0"/>
+                    <Button Grid.Column="1"
+                            Content="✕"
+                            Width="40"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource TextPrimaryBrush}"
+                            Cursor="Hand"
+                            Click="CloseButton_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="Bg" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Bg" Property="Background" Value="{StaticResource AccentRedBrush}"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- Контент -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="20">
+                <StackPanel>
+
+                    <!-- ТРЕКИНГ -->
+                    <Border Style="{StaticResource Card}" Margin="0,0,0,10">
+                        <StackPanel>
+                            <TextBlock Text="🎯 ТРЕКИНГ"
+                                       Foreground="{StaticResource AccentRedBrush}"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Margin="0,0,0,12"/>
+
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           Text="Интервал опроса (мс):"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBox Grid.Column="1"
+                                         x:Name="PollingIntervalBox"
+                                         Text="1000"/>
+                                <TextBlock Grid.Column="2"
+                                           Text="100–10000"
+                                           VerticalAlignment="Center"
+                                           Margin="12,0,0,0"
+                                           Foreground="{StaticResource TextMutedBrush}"
+                                           FontSize="{StaticResource FontSizeSmall}"/>
+                            </Grid>
+
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           Text="Порог простоя (сек):"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBox Grid.Column="1"
+                                         x:Name="IdleThresholdBox"
+                                         Text="300"/>
+                                <TextBlock Grid.Column="2"
+                                           Text="30–3600"
+                                           VerticalAlignment="Center"
+                                           Margin="12,0,0,0"
+                                           Foreground="{StaticResource TextMutedBrush}"
+                                           FontSize="{StaticResource FontSizeSmall}"/>
+                            </Grid>
+
+                            <CheckBox x:Name="TrackIdleCheck"
+                                      Content="Учитывать простой"
+                                      Margin="0,6,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- ОКНО И ТРЕЙ -->
+                    <Border Style="{StaticResource Card}" Margin="0,0,0,10">
+                        <StackPanel>
+                            <TextBlock Text="📌 ОКНО И ТРЕЙ"
+                                       Foreground="{StaticResource AccentRedBrush}"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Margin="0,0,0,12"/>
+
+                            <CheckBox x:Name="MinimizeToTrayCheck"
+                                      Content="Сворачивать в трей при сворачивании окна"
+                                      Margin="0,0,0,6"/>
+                            <CheckBox x:Name="CloseToTrayCheck"
+                                      Content="Закрывать в трей при нажатии на X"
+                                      Margin="0,0,0,6"/>
+                            <CheckBox x:Name="StartWithWindowsCheck"
+                                      Content="Запускать при старте Windows"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- ЛОГИ -->
+                    <Border Style="{StaticResource Card}" Margin="0,0,0,10">
+                        <StackPanel>
+                            <TextBlock Text="📋 ЛОГИ"
+                                       Foreground="{StaticResource AccentRedBrush}"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Margin="0,0,0,12"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           Text="Максимум файлов логов:"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBox Grid.Column="1"
+                                         x:Name="MaxLogFilesBox"
+                                         Text="30"/>
+                                <TextBlock Grid.Column="2"
+                                           Text="5–500"
+                                           VerticalAlignment="Center"
+                                           Margin="12,0,0,0"
+                                           Foreground="{StaticResource TextMutedBrush}"
+                                           FontSize="{StaticResource FontSizeSmall}"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- ЦЕЛИ И ЛИМИТЫ -->
+                    <Border Style="{StaticResource Card}" Margin="0,0,0,10">
+                        <StackPanel>
+                            <TextBlock Text="🎯 ЦЕЛИ И ЛИМИТЫ"
+                                       Foreground="{StaticResource AccentRedBrush}"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Margin="0,0,0,12"/>
+
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0"
+                                          x:Name="DailyLimitCheck"
+                                          Content="Лимит на приложения в день:"
+                                          VerticalAlignment="Center"
+                                          Margin="0,0,12,0"/>
+                                <TextBox Grid.Column="1"
+                                         x:Name="DailyLimitBox"
+                                         Text="2"/>
+                                <TextBlock Grid.Column="2"
+                                           Text="часов"
+                                           VerticalAlignment="Center"
+                                           Margin="8,0,0,0"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                            </Grid>
+
+                            <TextBlock Text="Процессы (через запятую):"
+                                       Foreground="{StaticResource TextSecondaryBrush}"
+                                       Margin="0,4,0,4"/>
+                            <TextBox x:Name="LimitedAppsBox"
+                                     Text="chrome, telegram, discord"/>
+
+                            <Grid Margin="0,12,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0"
+                                          x:Name="MinFocusCheck"
+                                          Content="Минимум фокуса в день:"
+                                          VerticalAlignment="Center"
+                                          Margin="0,0,12,0"/>
+                                <TextBox Grid.Column="1"
+                                         x:Name="MinFocusBox"
+                                         Text="240"/>
+                                <TextBlock Grid.Column="2"
+                                           Text="минут"
+                                           VerticalAlignment="Center"
+                                           Margin="8,0,0,0"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                            </Grid>
+
+                            <CheckBox x:Name="ShowLimitNotificationsCheck"
+                                      Content="Показывать уведомления при превышении"
+                                      Margin="0,12,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- КНОПКИ -->
+                    <Grid Margin="0,4,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                Content="Сброс"
+                                Style="{StaticResource DarkButton}"
+                                Width="90"
+                                Click="Reset_Click"/>
+                        <Button Grid.Column="2"
+                                Content="Экспорт"
+                                Style="{StaticResource DarkButton}"
+                                Width="90"
+                                Click="Export_Click"/>
+                        <Button Grid.Column="4"
+                                Content="Импорт"
+                                Style="{StaticResource DarkButton}"
+                                Width="90"
+                                Click="Import_Click"/>
+                        <Button Grid.Column="6"
+                                Content="💾 Сохранить"
+                                Style="{StaticResource AccentButton}"
+                                Width="130"
+                                Click="Save_Click"/>
+                    </Grid>
+
+                    <Button Content="📁 Открыть папку данных"
+                            Style="{StaticResource DarkButton}"
+                            HorizontalAlignment="Left"
+                            Width="200"
+                            Margin="0,10,0,0"
+                            Click="OpenDataFolder_Click"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</Window>

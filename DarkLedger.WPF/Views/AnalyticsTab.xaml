@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="DarkLedger.WPF.Views.AnalyticsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BackgroundDarkBrush}">
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ==================== ЗАГОЛОВОК ==================== -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,8">
+            <TextBlock Text="HEATMAP АКТИВНОСТИ (30 ДНЕЙ)"
+                       Foreground="{StaticResource TextMutedBrush}"
+                       FontSize="{StaticResource FontSizeSmall}"
+                       FontWeight="SemiBold"/>
+            <TextBlock Text="Чем ярче — тем больше времени в этот час"
+                       Foreground="{StaticResource TextMutedBrush}"
+                       FontSize="{StaticResource FontSizeSmall}"
+                       Margin="0,2,0,0"/>
+        </StackPanel>
+
+        <!-- ==================== HEATMAP ==================== -->
+        <Border Grid.Row="1"
+                Style="{StaticResource Card}"
+                Padding="12"
+                Margin="0,0,0,12"
+                Height="270">
+            <Grid x:Name="HeatmapHost"/>
+        </Border>
+
+        <!-- ==================== 2 КАРТОЧКИ ==================== -->
+        <Grid Grid.Row="2" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ИНДЕКС ФОКУСА -->
+            <Border Grid.Column="0" Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="ИНДЕКС ФОКУСА"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,6"/>
+                    <TextBlock x:Name="FocusValue"
+                               Text="—"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               FontSize="{StaticResource FontSizeTitleLarge}"
+                               FontWeight="Bold"/>
+                    <TextBlock x:Name="FocusSub"
+                               Text="нет данных"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- СРАВНЕНИЕ НЕДЕЛЬ -->
+            <Border Grid.Column="2" Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="СРАВНЕНИЕ НЕДЕЛЬ"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,6"/>
+                    <TextBlock x:Name="CompareValue"
+                               Text="—"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               FontSize="{StaticResource FontSizeTitleLarge}"
+                               FontWeight="Bold"/>
+                    <TextBlock x:Name="CompareSub"
+                               Text="нет данных"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- ==================== ТОП-5 ПРИЛОЖЕНИЙ ==================== -->
+        <Border Grid.Row="3" Style="{StaticResource Card}" Padding="16">
+            <StackPanel>
+                <TextBlock Text="ТОП-5 ПРИЛОЖЕНИЙ (30 ДНЕЙ)"
+                           Foreground="{StaticResource TextMutedBrush}"
+                           FontSize="{StaticResource FontSizeSmall}"
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,10"/>
+                <StackPanel x:Name="TopAppsContainer"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

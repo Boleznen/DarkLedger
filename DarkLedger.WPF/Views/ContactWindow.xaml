@@ -1,0 +1,171 @@
+﻿<Window x:Class="DarkLedger.WPF.Views.ContactWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        Title="Связь с разработчиком"
+        Width="560" Height="500"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStyle="None"
+        Background="{StaticResource BackgroundDarkBrush}"
+        Foreground="{StaticResource TextPrimaryBrush}"
+        FontFamily="{StaticResource FontFamilyMain}"
+        FontSize="{StaticResource FontSizeBody}">
+
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome CaptionHeight="0"
+                            ResizeBorderThickness="0"
+                            GlassFrameThickness="0"
+                            CornerRadius="0"
+                            UseAeroCaptionButtons="False"/>
+    </shell:WindowChrome.WindowChrome>
+
+    <Border BorderBrush="{StaticResource AccentBordeauxBrush}" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Кастомный тайтлбар -->
+            <Border Grid.Row="0"
+                    Background="{StaticResource AccentBordeauxBrush}"
+                    MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               Text="Связь с разработчиком"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               VerticalAlignment="Center"
+                               Margin="10,0,0,0"/>
+                    <Button Grid.Column="1"
+                            Content="✕"
+                            Width="40"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource TextPrimaryBrush}"
+                            Cursor="Hand"
+                            Click="CloseButton_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="Bg" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Bg" Property="Background" Value="{StaticResource AccentRedBrush}"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- Контент -->
+            <Grid Grid.Row="1" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Text="🖤 Связь с разработчиком"
+                           FontSize="{StaticResource FontSizeTitle}"
+                           FontWeight="Bold"
+                           Foreground="{StaticResource TextPrimaryBrush}"/>
+
+                <TextBlock Grid.Row="1"
+                           Text="&quot;Ledger помнит всё. Но никому не расскажет.&quot;"
+                           FontSize="{StaticResource FontSizeBody}"
+                           FontStyle="Italic"
+                           Foreground="{StaticResource TextSecondaryBrush}"
+                           Margin="0,6,0,0"/>
+
+                <TextBlock Grid.Row="2"
+                           Text="📨 Telegram: @Boleznen"
+                           FontSize="{StaticResource FontSizeBodyLarge}"
+                           FontWeight="Bold"
+                           Foreground="{StaticResource AccentPurpleBrush}"
+                           Margin="0,14,0,0"/>
+
+                <TextBlock Grid.Row="3"
+                           Text="ИНФОРМАЦИЯ О СИСТЕМЕ"
+                           FontSize="{StaticResource FontSizeSmall}"
+                           FontWeight="Bold"
+                           Foreground="{StaticResource TextMutedBrush}"
+                           Margin="0,18,0,6"/>
+
+                <Border Grid.Row="4"
+                        Background="{StaticResource BackgroundCardBrush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="6">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="10">
+                        <TextBlock x:Name="InfoText"
+                                   FontFamily="{StaticResource FontFamilyMono}"
+                                   FontSize="12"
+                                   Foreground="{StaticResource TextPrimaryBrush}"/>
+                    </ScrollViewer>
+                </Border>
+
+                <Grid Grid.Row="5" Margin="0,14,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0"
+                            Content="✈️ Открыть Telegram"
+                            Style="{StaticResource PurpleButton}"
+                            Width="180"
+                            Click="TelegramButton_Click"/>
+                    <Button Grid.Column="2"
+                            Content="📋 Скопировать логи"
+                            Style="{StaticResource DarkButton}"
+                            Width="180"
+                            Click="CopyLogsButton_Click"/>
+                    <Button Grid.Column="4"
+                            Content="📁 Открыть логи"
+                            Style="{StaticResource DarkButton}"
+                            Width="140"
+                            Click="OpenLogsButton_Click"/>
+                </Grid>
+
+                <Grid Grid.Row="6" Margin="0,14,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Text="Dark Ledger v2.0.0 — © 2026 @Boleznen"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               VerticalAlignment="Center"/>
+
+                    <Button Grid.Column="1"
+                            Content="Закрыть"
+                            Style="{StaticResource DarkButton}"
+                            Width="100"
+                            Click="CloseButton_Click"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,205 @@
+﻿<UserControl x:Class="DarkLedger.WPF.Views.ChronicleTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BackgroundDarkBrush}">
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Заголовок -->
+            <RowDefinition Height="Auto"/>
+            <!-- 4 карточки -->
+            <RowDefinition Height="Auto"/>
+            <!-- Toolbar -->
+            <RowDefinition Height="Auto"/>
+            <!-- Фильтры периодов -->
+            <RowDefinition Height="Auto"/>
+            <!-- Статус -->
+            <RowDefinition Height="*"/>
+            <!-- Список сессий -->
+        </Grid.RowDefinitions>
+
+        <!-- ==================== ЗАГОЛОВОК ==================== -->
+        <TextBlock Grid.Row="0"
+                   Text="ХРОНИКА СОБЫТИЙ"
+                   Foreground="{StaticResource TextMutedBrush}"
+                   FontSize="{StaticResource FontSizeSmall}"
+                   FontWeight="SemiBold"
+                   Margin="0,0,0,8"/>
+
+        <!-- ==================== 4 КАРТОЧКИ ==================== -->
+        <Grid Grid.Row="1" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- СЕССИЙ -->
+            <Border Grid.Column="0" Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="СЕССИЙ"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,4"/>
+                    <TextBlock x:Name="SessionsValue"
+                               Text="0"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               FontSize="{StaticResource FontSizeTitleLarge}"
+                               FontWeight="Bold"/>
+                    <TextBlock x:Name="SessionsSub"
+                               Text="Сегодня"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- СУММАРНО -->
+            <Border Grid.Column="2" Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="СУММАРНО"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,4"/>
+                    <TextBlock x:Name="TotalTimeValue"
+                               Text="0ч 0м"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               FontSize="{StaticResource FontSizeTitleLarge}"
+                               FontWeight="Bold"/>
+                    <TextBlock x:Name="TotalTimeSub"
+                               Text="нет данных"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- ГЛАВНОЕ -->
+            <Border Grid.Column="4" Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="ГЛАВНОЕ"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,4"/>
+                    <TextBlock x:Name="TopAppValue"
+                               Text="—"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               FontSize="{StaticResource FontSizeTitle}"
+                               FontWeight="Bold"
+                               TextTrimming="CharacterEllipsis"/>
+                    <TextBlock x:Name="TopAppSub"
+                               Text="нет данных"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- ФОКУС -->
+            <Border Grid.Column="6" Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="ФОКУС"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,4"/>
+                    <TextBlock x:Name="FocusValue"
+                               Text="0"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               FontSize="{StaticResource FontSizeTitleLarge}"
+                               FontWeight="Bold"/>
+                    <TextBlock x:Name="FocusSub"
+                               Text="нет данных"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               FontSize="{StaticResource FontSizeSmall}"
+                               Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- ==================== TOOLBAR ==================== -->
+        <Grid Grid.Row="2" Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Поиск -->
+            <TextBox Grid.Column="0"
+                     x:Name="SearchBox"
+                     TextChanged="SearchBox_TextChanged"
+                     ToolTip="🔍 Поиск по названию приложения"/>
+
+            <!-- Фильтр по приложению -->
+            <ComboBox Grid.Column="2"
+                      x:Name="AppFilterCombo"
+                      SelectionChanged="AppFilterCombo_SelectionChanged"/>
+
+            <!-- Сбросить -->
+            <Button Grid.Column="4"
+                    Content="✖ Сбросить"
+                    Style="{StaticResource DarkButton}"
+                    Click="ClearFilters_Click"/>
+
+            <!-- Кнопки экспорта -->
+            <StackPanel Grid.Column="6" Orientation="Horizontal">
+                <Button Content="📊 CSV" Style="{StaticResource DarkButton}"
+                        Click="ExportCsv_Click" Margin="0,0,8,0"/>
+                <Button Content="📄 TXT" Style="{StaticResource DarkButton}"
+                        Click="ExportTxt_Click" Margin="0,0,8,0"/>
+                <Button Content="📋 Копировать" Style="{StaticResource DarkButton}"
+                        Click="CopyToClipboard_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- ==================== ФИЛЬТРЫ ПЕРИОДОВ ==================== -->
+        <StackPanel Grid.Row="3"
+                    Orientation="Horizontal"
+                    Margin="0,0,0,8">
+            <RadioButton x:Name="FilterToday" Content="Сегодня" GroupName="ChrPeriod"
+                         Style="{StaticResource FilterButton}" IsChecked="True"
+                         Margin="0,0,8,0" Click="Filter_Click" Tag="Today"/>
+            <RadioButton x:Name="FilterYesterday" Content="Вчера" GroupName="ChrPeriod"
+                         Style="{StaticResource FilterButton}"
+                         Margin="0,0,8,0" Click="Filter_Click" Tag="Yesterday"/>
+            <RadioButton x:Name="Filter7Days" Content="7 дней" GroupName="ChrPeriod"
+                         Style="{StaticResource FilterButton}"
+                         Margin="0,0,8,0" Click="Filter_Click" Tag="Last7Days"/>
+            <RadioButton x:Name="Filter30Days" Content="30 дней" GroupName="ChrPeriod"
+                         Style="{StaticResource FilterButton}"
+                         Click="Filter_Click" Tag="Last30Days"/>
+        </StackPanel>
+
+        <!-- ==================== СТАТУС ==================== -->
+        <TextBlock Grid.Row="4"
+                   x:Name="StatusText"
+                   Text="Показано: 0 сессий"
+                   Foreground="{StaticResource TextMutedBrush}"
+                   FontSize="{StaticResource FontSizeSmall}"
+                   Margin="0,0,0,8"/>
+
+        <!-- ==================== СПИСОК СЕССИЙ ==================== -->
+        <Border Grid.Row="5"
+                Background="{StaticResource BackgroundDarkBrush}"
+                BorderThickness="0">
+            <ScrollViewer x:Name="SessionsScrollViewer"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <StackPanel x:Name="SessionsContainer"/>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>
