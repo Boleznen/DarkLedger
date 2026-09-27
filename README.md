@@ -49,4 +49,4 @@
 
 ## 📄 Лицензия
 
-MIT
+AGPL-3.0 — см. [LICENSE](LICENSE)
